@@ -7,7 +7,8 @@ def menu():
         "(2)Cadastrar Cliente\n",
         "(3)Criar Contrato\n",
         "(4)Visualizar Consultores\n",
-        "(5)Visualizar Consultor\n",
+        "(5)Visualizar Clientes\n",
+        "(6)Visualizar Consultor\n",
         "(s)Sair do Sistema\n")
         inp = input()
         if inp == '1':
@@ -19,6 +20,8 @@ def menu():
         if inp == '4':
             get_consultores()
         if inp == '5':
+            get_clientes()
+        if inp == '6':
             get_consultor()
         if inp == 's':
             break

@@ -22,7 +22,7 @@ class Contrato:
         ### INICIALIZA A CLASSE DOS CONTRATOS DO SISTEMA
         self.title = int(title) 
         self.associates = associates 
-        self.description = descript
+        self.description = description
         self.id = f'C{id_generator.generate()}' #Este C indica que é um Contrato
         self.created_dt = f'{datetime.datetime.now()}'
         self.end_period = end_period
@@ -32,12 +32,12 @@ class Contrato:
     @staticmethod
     def __review__(self,):
         print("Status:",'\n')
-        print("Title:",str(title))
+        print("Title:",str(self.title))
         for i in self.associates: 
             ###Ao efetuar essa operação, o código não mostra os associados do contrato, mas não sei o motivo.
-            print("Associates:",i)
+            print(f"Associates: {i}")
         print('\n',self.description)
-        print('Concluded':self.concluded)
+        print('Concluded: ', self.concluded)
         return None
     
     def conclude_contract(self): 
@@ -59,7 +59,7 @@ class Contrato:
 
 class User:
 
-    def init(self,username,password):
+    def __init__(self,username,password):
         '''Essa classe serve como um modelo base para a interação tanto para os Consultores quanto para os Clientes que
         utilizaram o terminal.'''
         self.username = username
@@ -76,15 +76,21 @@ class User:
             return None
         print("Error, invalid user")
 
+    def view(self):
+        print("Username:",self.username)
+        print("Status:", self.status)
+        print("Id:", self.id)
+        return None
+
 class Consultor(User):
     def __init__(self,username,password):
-        super.__init__(username,password)
+        super().__init__(username,password)
         self.status = 'Consultant'
         self.id = f'C{id_generator.generate()}' #Este C indica que é um Consultor
         self.projects = []
         return None
 
-class Cliente:
+class Cliente(User):
     def __init__(self,username,password):
         super().__init__(username,password)
         self.status = 'Client'

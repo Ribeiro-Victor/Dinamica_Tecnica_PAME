@@ -1,4 +1,4 @@
-from classes import Cliente,Consultor
+from classes import Cliente, Consultor, Contrato
 
 s=None
 contratos={}
@@ -9,14 +9,17 @@ consultores = {}
 def post_consultor():
     username = input("Username\n")
     password = input("Password\n")
+    c = Consultor(username, password)
+    consultores[c.id] = c
     print("Consultor adicionado ao sistema!")
     return None
 
 def put_cliente():
     username = input("Username\n")
     password = input("Password\n")
-    
-    print("Consultor adicionado ao sistema!")
+    c = Cliente(username, password)
+    clientes[c.id] = c
+    print("Cliente adicionado ao sistema!")
     return None
           
 def get_contrato():
@@ -28,12 +31,12 @@ def get_contrato():
         print("Não há clientes e/ou consultores cadastrados.")
         return None
     else:
-        cliente = clientes.keys(input('Id do cliente:\n'))
-        consultor = consultores.keys(input('Id do consultor:\n'))
+        cliente = clientes[input('Id do cliente:\n')]
+        consultor = consultores[input('Id do consultor:\n')]
     
     contrato = Contrato(title,end_period,description=description,associates=f'{cliente}/{consultor}')
     contratos[f'{contrato.id}']=contrato
-    print("Consultor adicionado ao sistema!")
+    print("Contrato adicionado ao sistema!")
     return None
 
 def put_contrato():
@@ -50,6 +53,13 @@ def get_consultores():
 
 def get_consultor():
     print("Consultor Log")
-    id = int(input("Id do consultor"))
+    print()
+    id = input("Id do consultor")
     consultores[id].view()
+    print("----------------------------")
+
+def get_clientes():
+    print("Clientes Log")
+    for cliente in clientes.values():
+        cliente.view()
     print("----------------------------")
